@@ -1,0 +1,13 @@
+3-7-2017_12.json
+env/
+*.pem
+*.save
+*.csv
+*.h5
+certificate.pem
+create_db.py
+test.py
+*.pyc
+.__pycache__/
+.idea/
+

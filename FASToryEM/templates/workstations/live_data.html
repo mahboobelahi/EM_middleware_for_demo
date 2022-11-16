@@ -1,0 +1,94 @@
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+<!-- <div class="ct-chart ct-perfect-fourth"></div> -->
+<div class="container-fluid" id="data-container"></div>
+<!-- <script>
+
+        var getData= $.get('/measurements/history');
+    
+        getData.done(function(results){
+            console.log(results);
+            var data = {
+                // A labels array that can contain any sort of values
+                //labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'],
+                // Our series array that contains series objects or in this case series data arrays
+                
+                series: [
+                  results.results
+                ]
+              };
+
+              var options = {
+                  with : 800,
+                  height : 600
+              }
+              
+              // Create a new line chart object where as first parameter we pass in a selector
+              // that is resolving to our chart container element. The Second parameter
+              // is the actual data object.
+              new Chartist.Line('.ct-chart', data,options);
+              
+        });
+        
+    
+    
+</script> -->
+ 
+
+<script>
+
+    
+    var chart;
+    function requestData()
+    {
+        // Ajax call to get the Data from Flask.
+        var requests = $.get('/measurements/history');
+        requests.done(function (result)
+            {
+                console.log(result);
+                
+                var series = chart.series[0];
+                shift = series.data.length > 20;
+                chart.series[0].addPoint(result, true, shift);
+                setTimeout(requestData, 1000);
+
+    });
+} 
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'data-container',
+                defaultSeriesType: 'spline',
+                events: {
+                    load: requestData
+                }
+            },
+            title: {
+                text: 'Live Power Measurements'
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150,
+                maxZoom: 20 * 1000,
+                
+            },
+            yAxis: {
+                minPadding: 0.2,
+                maxPadding: 0.2,
+                title: {
+                    text: 'Power(W)',
+                    margin: 80
+                }
+            },
+            series: [{
+                name: 'Measurements',
+                data: []
+            }]
+        });
+    });
+    
+ </script> 
+{% endblock %}
+
+
+ 

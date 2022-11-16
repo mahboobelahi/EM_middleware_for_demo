@@ -1,0 +1,78 @@
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+
+        <h1> FASTory Workstations Information </h1>
+        <div class="row">
+            <div class="col-8">
+                <table class="table  table-hover  table-bordered  text-nowrap">
+            
+                    <tr>
+                        <th> ID </th> 
+                        <td> {{ info.id }} </td>
+                    </tr>
+                    <tr>
+                        <th> Make </th>
+                        <td> {{ info.RobotMake }} </td>
+                    </tr>
+                    <tr>
+                        <th> Type </th>
+                        <td> {{ info.RobotType }} </td>
+                    </tr>
+                    <tr>
+                        <th> Name At ZDMP-DAQ Component </th>
+                        <td> {{ info.WorkCellName }} </td>
+                    </tr>
+                    <tr>
+                        <th> ZDMP-DAQ External ID </th>
+                        <td> {{ info.DAQ_ExternalID }} </td>
+                    </tr>
+                    <tr>
+                        <th> ZDMP-DAQ Source ID </th>
+                        <td> {{ info.DAQ_SourceID }} </td>
+                    </tr>
+                    <tr>
+                        <th> Has Zone4 </th>
+                        <td> {{ info.HasZone4}} </td> 
+                    </tr>
+                    <tr>
+                        <th> Workstation Local IP </th>
+                        <td> {{ info.WorkCellIP }} </td>
+                    </tr>
+                      <tr>
+                              <th>CNV Service Url</th>
+                              <td>{{info.CNV_service_url}}</td>
+                      </tr>
+                        {% if info.HasEM_Module %}
+                        <tr>
+                                <th> S1000-E10 Module</th>
+                                <td> {{ info.HasEM_Module}} </td>
+                        </tr>        
+                        <tr>
+                                <th> S1000 Energy Service URL </th>
+                                <td> {{ info.EM_service_url }} </td>
+                        </tr>
+        
+                        {% else %}
+                               <tr> 
+                                        <th> S1000-E10 Module</th>       
+                                        <td> {{ info.HasEM_Module}} </td>
+                                </tr>
+                                <tr>
+                                        <th> S1000 Energy Service URL </th>
+                                        <td> N/A </td>
+                                </tr>
+                        {% endif %}
+             
+                </table>
+            </div>
+            <div class='col-4 ' >
+            
+                <img src="{{ url_for('static', filename='images/WS'+info.id|string+'.jpg') }}" 
+                    class="img-thumbnail"
+                    alt="N/A"
+                    style="width: 310px;height:310px"/>
+            </div>
+        </div>
+
+
+{% endblock %}

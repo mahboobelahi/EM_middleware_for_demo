@@ -1,0 +1,22 @@
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+    <h1>FASTory CNV Services</h1>
+    <h4>Please select conveyor section and Command.</h4>
+        <div class="form-check form-switch">
+            <form action="/cnv_cmd" method="POST">
+
+                <input class="form-check-input" type="radio" name="cnv" id="m_cnv" value="main"> Main Conveyor </input><br>
+                {% if Z4 %}
+                    <input class="form-check-input" type="radio" name="cnv" id="by_cnv" value="bypass"> Bypass Conveyor</input><br>
+                    <input class="form-check-input" type="radio" name="cnv" id="bo_cnv" value="both"> Both Conveyors </input><br>
+                {% endif %}
+                
+                <hr>
+                <input class="form-check-input" type="radio" name="cmd" id="start" value="start"> Start </input><br>
+                <input class="form-check-input" type="radio" name="cmd" id="stop" value="stop"> Stop </input><br>
+                <input  class="btn btn-outline-dark" type="submit" name="command" value="Proced">
+            </form>
+        </div>
+
+
+{% endblock %}

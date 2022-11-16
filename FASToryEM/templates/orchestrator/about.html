@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+    {% block content %}
+    <h1>FASTory-Data-Collection</h1>
+    <p style="text-align: justify;">
+        <h4>This middleware application performs following tasks:</h4>
+        <ul>
+            <li>Fills the communication protocole gap between ZDMP and EM-S1000 devices</li>
+            <li>Integrates FASTory workcells' EM-S1000 to ZDMP DAQ component</li>
+            <li>Invoke REST-FULL provided by FASTory line </li>
+            <li>Send FASTory workcells' Energy measurements to ZDMP-DAQ component</li>
+            <li>Collects FASTory Line's Main Conveyor Belt Motor Driver Power Consumption Data
+                 under different work load on conveyor belt
+                  with Belt Tension ranging 75-85 percent.</li> 
+        </ul>
+        
+        This data will be used by FASTory Energy Monitoring App during Initial development phase and testing.
+        Due to COVID-19 restriction, researcher has limited access to FAST-LAB,
+        hence real-time Power consumption data was collected once for different work loads at 75-85% conveyor belt tension
+        and stores in SQlit3 data base for future.
+        During development and testing data records from CSV file were processed by python script and sends
+        to ZDMP DAQ after every one sec (In RT the Power consumption measurements were collected at 1sce sampling rate).
+
+    </p>
+
+    {% endblock content %}

@@ -1,0 +1,248 @@
+<!-- {{power}}
+{{power|length}}
+{{voltage|length}}
+{{current|length}} -->
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+
+  <div class="row">
+    {% if (power|length) >2 %}
+        <!-- Power -->
+        <div class="col-xs-12, col-sm-6">
+          <div class="card card-style mb-2">
+              <div class="card-body">
+                  <div class="chart-container" style="position: relative;">
+                    <canvas id="Power"></canvas>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        <!-- BeltTension -->
+        <div class="col-xs-12, col-sm-6">
+          <div class="card card-style mb-2">
+              <div class="card-body">
+                  <div class="chart-container" style="position: relative;">
+                    <canvas id="BeltTension"></canvas>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="row">
+        <!-- Voltage -->
+        <div class="col-xs-12, col-sm-6">
+          <div class="card card-style mb-2">
+              <div class="card-body">
+                  <div class="chart-container" style="position: relative;">
+                    <canvas id="Voltage"></canvas>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <!-- Current -->
+        <div class="col-xs-12, col-sm-6">
+          <div class="card card-style mb-2">
+              <div class="card-body">
+                  <div class="chart-container" style="position: relative;">
+                    <canvas id="Current"></canvas>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+      
+      {% block javascript %}
+      <script>
+
+                  let power =  JSON.parse({{power|tojson}});
+                  let labels =  JSON.parse({{label|tojson}});    
+                  let voltage =  JSON.parse({{voltage|tojson}});
+                  let current =  JSON.parse({{current|tojson}});
+                  let BTClass =  JSON.parse({{BTClass|tojson}});
+                  console.log('>>>>')
+                  new Chart(document.getElementById("Power"), {
+                    type: "line",
+                    data:
+                    {
+                        labels: labels,
+                        datasets: [{
+                            label: "Power Measurements",
+                            
+                            data: power,
+                            pointRadius: 0,
+                            fill: false,
+                            borderColor: "rgba(143, 0, 5)",
+                            borderWidth: 2,
+                            lineTension: 0.1
+                        }]
+                    },
+                    options: {
+                      scales: {
+                                x: { title: {
+                                            display: true,
+                                              text: 'Samples'
+                                            },
+                                            suggestedMax: 428,
+                                            suggestedMin: 1
+                                            },
+                                y: { title: {
+                                            display: true, 
+                                            text: 'Power(W)'
+                                            },
+                                            suggestedMax:Math.max(...power),
+                                            suggestedMin: Math.min(...power)
+                                            },
+                        }
+
+                    }
+                });
+
+                ////////////////////////////////////
+                new Chart(document.getElementById("Voltage"), {
+                  type: "line",
+                  data:
+                  {
+                      labels: labels,
+                      datasets: [{
+                          label: "Voltage Measurements",
+                          
+                          data: voltage,
+                          pointRadius: 0,
+                          fill: false,
+                          borderColor: "rgba(143, 0, 5)",
+                          borderWidth: 2,
+                          lineTension: 0.1
+                      }]
+                  },
+                  options: {
+                    scales: {
+                              x: { title: {
+                                          display: true,
+                                            text: 'Samples'
+                                          },
+                                          suggestedMax: 505,
+                                          suggestedMin: 1
+                                          },
+                              y: { title: {
+                                          display: true, 
+                                          text: 'rmsVoltage(V)'
+                                          },
+                                          suggestedMax: 248,//Math.max(...voltage),
+                                          suggestedMin: 235//Math.min(...voltage)
+                                          },
+                      }
+
+                  }
+              });
+              /////////////////////////////////////
+              new Chart(document.getElementById("Current"), {
+                type: "line",
+                data:
+                {
+                    labels: labels,
+                    datasets: [{
+                        label: "Current Measurements",
+                        
+                        data: current,
+                        pointRadius: 0,
+                        fill: false,
+                        borderColor: "rgb(143, 0, 5)",
+                        borderWidth: 2,
+                        lineTension: 0.1
+                    }]
+                },
+                options: {
+                          scales: {
+                                    x: { title: {
+                                                display: true,
+                                                  text: 'Samples'
+                                                },
+                                                suggestedMax: 505,
+                                                suggestedMin: 1
+                                                },
+                                    y: { title: {
+                                                display: true, 
+                                                text: 'rmsCurrent(A)'
+                                                },
+                                                suggestedMax: Math.max(...current),
+                                                suggestedMin: Math.min(...current)
+                                                },
+                            }
+
+                        }
+              });
+          ///////////////////////////////////////////////
+          new Chart(document.getElementById("BeltTension"), {
+            type: "bar",
+            data:
+            {
+                labels: [1,2,3],
+                datasets: [{
+                    label: "Predicted Belt Tension Class",
+                    data: BTClass,
+                    backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(50, 240, 48, 0.2)',
+                    //'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                  ],
+                  borderColor: [
+                  'rgb(255, 99, 132)',
+                  'rgb(50, 240, 48)',
+                  //'rgb(255, 159, 64)',
+                  'rgb(255, 205, 86)',
+                  'rgb(75, 192, 192)',
+                  'rgb(54, 162, 235)',
+                  'rgb(153, 102, 255)',
+                  'rgb(201, 203, 207)'
+                ],
+                borderWidth: 1
+                }]
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true
+                }
+            }  
+          }
+        });
+        </script>
+      
+
+      {% endblock %}
+  {% else %}
+        <br>
+        {% if id in [1,7,8] %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Workstation_{{id}} has no S1000-E10 module.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% else %}
+        <br>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Yet no measurements recorded for Workstation_{{id}}.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+  <div class="col-3">
+    <a  class="btn btn-outline-primary btn-lg " href="{{url_for('info')}}">Need Work Cell Infomation!</a>
+  </div>
+  {% endif %}
+
+  
+{% endblock %}
+
+
+
+
+
+ 

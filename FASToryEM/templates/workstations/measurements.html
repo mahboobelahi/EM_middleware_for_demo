@@ -1,0 +1,65 @@
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+
+    {% if (contxt.measurements.total)!=0 %}
+      <h1>Measurements for Workstation_{{contxt.measurements.items[0].WorkCellID}}</h1>
+        <table class="table table-bordered  text-nowrap">
+          <!-- <th> ID </th>  -->
+          <th> RMS Voltage </th> 
+          <th> RMS Current </th> 
+          <th> Power(W) </th> 
+          <th> Nominal Power </th> 
+          <th> Active Zones of CNV </th> 
+          <th> Load on CNV</th>
+          <th> Time </th>
+          {#% set count = namespace(value=0) %#}
+          {% for measurement in contxt.measurements.items %}
+          {#% set count.value = count.value + 1 %#}
+              <tr> 
+                  {#<td> {{loop.index}}{ count.value }#}{#{ measurement.id } </td>#}
+                  <td> {{ measurement.RmsVoltage }} </td>
+                  <td> {{ measurement.RmsCurrent }} </td>
+                  <td> {{ measurement.Power }} </td>
+                  <td> {{ measurement.Nominal_Power}} </td> 
+                  <td> {{ measurement.ActiveZones }} </td> 
+                  <td> {{ measurement.Load }} </td>
+                  <td> {{ measurement.timestamp }} </td>        
+              </tr>  
+          {% endfor %}  
+      </table>
+
+      {# Pagination #}
+
+      {% for page_num in contxt.measurements.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+          {% if page_num %}
+            {% if contxt.measurements.page == page_num %}
+              <a class="btn btn-info mb-4" href="{{ url_for('insert_measurements2Db', page=page_num) }}">{{ page_num }}</a>
+            {% else %}
+              <a class="btn btn-outline-info mb-4" href="{{ url_for('insert_measurements2Db', page=page_num) }}">{{ page_num }}</a>
+            {% endif %}
+          {% else %}
+            ...
+          {% endif %}
+      {% endfor %}
+      
+    {% else %}
+      {% if not(contxt.hasEM)   %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Workstation_{{contxt.id}} has no S1000-E10 module.</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          
+          <div class="col-3">
+            <a  class="btn btn-outline-primary btn-lg " href="{{url_for('info')}}">Need Work Cell Infomation!</a>
+          </div>
+      {% else %}
+          <div class="row">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong>Yet no measurements recorded for Workstation_{{contxt.id}}.</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          </div>
+      {% endif %}
+    {% endif %}
+    
+{% endblock %}

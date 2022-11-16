@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<h2>Welcom To Future Automation and System Technologies Laboratory</h2>
+<div class="container row" style="margin-top: 20px">
+  <div class="col-8">
+    <p class="p"><strong> Some Text Here!!!! </strong></p>
+  </div>
+  <div class="col-4">
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/iRfhDNktmSI?controls=0"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <img
+      src="{{ url_for('static', filename='images/FASTory.png') }}"
+      class="border border-2 border-secondary mx-auto d-block"
+      alt="Buffer Station"
+      style="width: 1200px; height: 600px; margin-top: 10px"
+    />
+  </div>
+</div>
+
+{% endblock content %}

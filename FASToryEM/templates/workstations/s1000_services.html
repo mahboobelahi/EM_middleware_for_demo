@@ -1,0 +1,25 @@
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+    
+    {% if EM %}
+        <h1>Choose an action for S1000 EM Energy Services</h1>
+            <div  class="form-check form-switch">
+                <form action="/E10_services" method="POST">
+                    <input class="form-check-input" type="radio" name="cmd" id="start" value="start"> Start Energy Services</input><br>
+                    <input class="form-check-input" type="radio" name="cmd" id="stop" value="stop"> Stop Energy Services</input><br>
+                    <input class="btn btn-outline-dark " type="submit" name="command" value="Proced">
+                </form>
+            </div>
+    {% else %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Workstation_{{id}} has no S1000-E10 module.</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <div class="col-3">
+        <a  class="btn btn-outline-primary btn-lg " href="{{url_for('info')}}">Need Work Cell Infomation!</a>
+      </div> 
+    {% endif %}
+
+
+
+{% endblock %}

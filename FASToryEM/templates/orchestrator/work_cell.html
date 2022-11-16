@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row gy-3">
+    <h1>FASTory Line's Workstations:</h1>          
+    {% for workstation in content %}
+    <div class="col-3" >   
+        <div class="card" style="width: 15rem; ">
+            {% if workstation.WorkCellID==7 %}
+            <img src="{{ url_for('static', filename='images/FASTory.png') }}" 
+            class=" img-thumbnail mx-auto d-block"
+            alt="Buffer Station"
+            style=" width: 280px;height:200px;margin-top:15px"/>
+            {% else %}
+            <img src="{{ url_for('static', filename='images/WS'+workstation.WorkCellID|string+'.jpg') }}" 
+            class=" img-thumbnail mx-auto d-block"
+            alt="Buffer Station"
+            style="width: 200px;height:200px; margin-top:10px"/>  
+            {% endif %}
+
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a class="btn btn-primary" style="background: #8f0004;border: none;" href="{{workstation.WorkCellIP}}/">
+                Workstation {{workstation.WorkCellID}}</a>
+            </div>
+          </div>       
+    </div>
+    {% endfor %} 
+</div>
+{% endblock %}
+
+<!-- <div class="row">
+    <h1>FASTory Line's Workstations:</h1>          
+    {% for workstation in content %}
+        <div class="col-3" >   
+            <a class="btn btn-primary" href="{{workstation.WorkCellIP}}/">
+            Workstation_{{workstation.WorkCellID}}</a>
+        </div>
+    {% endfor %} 
+</div> -->
+
+<div class="row">
+    <div class="col-sm-6">
+
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment</h5>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>

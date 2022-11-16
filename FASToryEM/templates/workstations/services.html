@@ -1,0 +1,28 @@
+{% extends 'wrk_cell_base.html' %}
+{% block content %}
+
+{% with messages = get_flashed_messages()  %}
+        {% if messages %}
+            {% for msg in messages %}
+            <!-- <div class="alert alert-success alert-dismissable" role="alert">
+        
+                {{msg}}
+       </div> -->
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                <strong>{{msg}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>    
+            {% endfor %} 
+        {% endif %}
+    {% endwith %}  
+    <h1>Available Services at FAST-LAB</h1>
+    <div id="list-example" class="list-group">
+        <ul class="list-group" class="col-3">
+        <a class="Light link list-group-item list-group-item-action" href="/fastory_services" " tabindex="-1" role="button">Conveyor Belt Services</a>
+        <a class="Light link list-group-item list-group-item-action" href="/s1000_services"  tabindex="-1" role="button" >S1000-EM Services</a>
+    </ul>
+    </div>  
+    <hr>
+    <h1>Available Services at ZDMP</h1>
+{% endblock %}
+<!-- class="btn btn-primary btn-lg -->

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+<div class="cover">
+  {% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>FASTory Assembly Line</h3>
+        <p class="p">
+          The FASTory Assembly Line highlights the collaboration between robots
+          and machines. It mimics phone assembly operation by drawing (yes, you
+          read that right) different phone models. It consists of 10
+          workstations each with a robot that can draw the main components
+          (frame, screen and keyboard with different colours and shapes) of
+          three models of a mobile phone on a sheet of paper carried by a
+          pallet. This combination results in the production of 729 variants
+          (i.e., 9 different screens * 9 different keyboards * 9 different
+          frames). The product flow in the assembly line is made possible by a
+          conveyor. The FASTory assembly line makes use of air pressure to
+          actuate the track selector in the conveyor and the end effector in the
+          robots. In addition, each workstation has a bypass conveyor that
+          enables the transit of pallets to the next available workstation while
+          the robot is in use. Each workstation is equipped with web-service
+          enabled Remote Terminal Units (RTUs) for subscribing to predefined
+          events on each workstation (such as sensor changes or robot status).
+          The RTUs are implemented using the INICO S1000 controller and is based
+          on Service-Oriented Architecture (SOA).
+        </p>
+      </div>
+      <div class="col">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/D4G09_wwI6M?controls=0"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  {% endblock content %}
+</div>
