@@ -5,4 +5,4 @@ this the Power consumption data was collected for different work loads at 75-85%
 Data records will be reads from CSV file and sends to ZDMP DAQ after every one sec (In RT the Power consumption measurements were collected at 1sce sampling rate).
 
 ## Integration of PR Model
-PR model is not integrated with this application. Please use  **PatternRecognizer Application** for predection of Belt Tension Class.
+PR model is not integrated with this application. It is deployed on ZDMP-AIART. 
